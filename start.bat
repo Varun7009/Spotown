@@ -1,39 +1,34 @@
 @echo off
 setlocal enabledelayedexpansion
-title Spotown - Launching
-mode con: cols=100 lines=30
-
-:: Clear screen and set colors
+title Spotown - Launcher
 cls
-color 0A
 
 echo.
-echo    ================================================================================
-echo      ____  ____   ___  _______  _____  _      _  __ _  
-echo     / ___||  _ \ / _ \/__   __||  _  || |    | ||  \ | | 
-echo     \___ \| |_) | | | |  | |   | | | || | /\ | ||   \| | 
-echo      ___) |  __/| |_| |  | |   | |_| || |/  \| || |\   | 
-echo     |____/|_|    \___/   |_|   \_____/\__/  \__/|_| \__| 
+echo    ============================================================
+echo         SPOTOWN  --  MUSIC DOWNLOADER ENGINE
+echo    ============================================================
 echo.
-echo    ================================================================================
-echo.
-echo    [1/3] Starting Spotown Backend (Port 3001)...
+echo    [1/3] Starting Spotown Backend Server...
 start "Spotown Backend" cmd /c "npx ts-node server.ts"
 
-echo    [2/3] Starting Spotown Frontend (Port 3000)...
+echo    [2/3] Starting Spotown Frontend Server...
 start "Spotown Frontend" cmd /c "npm run dev"
 
-echo    [3/3] Waiting for servers to initialize...
+echo.
+echo    [3/3] Waiting for servers to initialize (5s)...
 timeout /t 5 /nobreak > nul
 
-echo    [DONE] Launching Browser...
+echo.
+echo    ============================================================
+echo    [DONE] Launching Spotown in your browser...
+echo    ============================================================
+echo.
 start http://localhost:3000
 
 echo.
-echo    --------------------------------------------------------------------------------
-echo    Everything is running! 
-echo    - Keep the two black windows open to keep the site running.
-echo    - Close them when you want to stop the servers.
-echo    --------------------------------------------------------------------------------
+echo    Everything is up and running! 
+echo.
+echo    - Keep the two separate windows open to keep the app alive.
+echo    - If you close them, the app will stop working.
 echo.
 pause
