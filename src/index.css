@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-g:      #1DB954;
+  --color-g-dim:  rgba(29, 185, 84, 0.12);
+  --color-canvas: #080808;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #080808;
+  color: #ffffff;
+  @apply antialiased font-sans;
+  transition: background 0.5s ease;
+  /* Hide scrollbar — keep scrolling */
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge */
+}
+body::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
+
+/* Also hide on html root */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar { display: none; }
+
+/* ── Glass — always dark, never light ─────────────────────────── */
+.glass {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+/* Stronger glass for popovers/dropdowns */
+.glass-pop {
+  background: rgba(8, 8, 8, 0.88);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Fixed Background Blobs ───────────────────────────────────── */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+}
+.bg-blob-1 {
+  width: 60vw; height: 60vw;
+  top: -15%; left: -10%;
+  background: radial-gradient(circle, rgba(29,185,84,0.14) 0%, transparent 70%);
+}
+.bg-blob-2 {
+  width: 45vw; height: 45vw;
+  bottom: -10%; right: -8%;
+  background: radial-gradient(circle, rgba(29,185,84,0.09) 0%, transparent 70%);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+.scroll { overflow-y: auto; }
+.scroll::-webkit-scrollbar         { width: 5px; }
+.scroll::-webkit-scrollbar-track   { background: transparent; }
+.scroll::-webkit-scrollbar-thumb   { background: rgba(255,255,255,0.1); border-radius: 99px; }
+.scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Inputs ────────────────────────────────────────────────────── */
+.sf-input {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #fff;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.sf-input:focus {
+  outline: none;
+  border-color: rgba(29, 185, 84, 0.45);
+  background: rgba(0, 0, 0, 0.55);
+}
+.sf-input::placeholder { color: rgba(255, 255, 255, 0.25); }
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn-g {
+  background: #1DB954;
+  color: #000;
+  font-weight: 800;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.btn-g:hover   { filter: brightness(1.12); }
+.btn-g:active  { transform: scale(0.97); }
+
+/* ── Track rows ────────────────────────────────────────────────── */
+.track-row {
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.track-row:last-child { border-bottom: none; }
+.track-row:hover { background: rgba(255, 255, 255, 0.03); }
+
+/* ── Status badges ─────────────────────────────────────────────── */
+.badge-wait        { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.45); }
+.badge-downloading { background: rgba(29,185,84,0.15);  color: #1DB954; }
+.badge-done        { background: rgba(29,185,84,0.18);  color: #1DB954; }
+.badge-error       { background: rgba(239,68,68,0.15);  color: #f87171; }
+
+/* ── Progress bar ──────────────────────────────────────────────── */
+.bar-fill {
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform 0.25s ease-out;
+}
+
+/* ── Skeleton shimmer ──────────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Spinner ───────────────────────────────────────────────────── */
+.spin { animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Entrance animation ────────────────────────────────────────── */
+.fade-up { animation: fadeUp 0.35s ease-out both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
