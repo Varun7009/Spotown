@@ -2,7 +2,7 @@
 
 > Download your Spotify playlists, albums and tracks in **MP3**, **FLAC (Lossless)**, or **WAV** — with full metadata, album art, and audio enhancement. Beautiful glass-morphic UI included.
 
-![Spotown Banner](https://github.com/Varun7009/Spotown/raw/main/Preview.jpg)
+![Spotown Banner](https://github.com/Varun7009/Spotown/raw/main/Preview.png)
 
 ---
 
